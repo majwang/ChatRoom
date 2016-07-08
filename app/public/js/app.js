@@ -27,41 +27,29 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth",
 		$scope.message = 'ChatRoom';
 		$scope.auth = Auth;
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
-			$scope.firebaseUser = firebaseUser;
-			
-		});
-
-		firebase.auth().onAuthStateChanged(function(user) {
-		  if (user) {
-		    // User is signed in.
-
-
-				var user = firebase.auth().currentUser;
-
-				if (user != null) {
-		  user.providerData.forEach(function (profile) {
+        $scope.firebaseUser = firebaseUser;
+		console.log("Name: "+firebaseUser.displayName);
+		firebaseUser.providerData.forEach(function (profile) {
 		    console.log("Sign-in provider: "+profile.providerId);
 		    console.log("  Provider-specific UID: "+profile.uid);
-		    console.log("  Name: "+profile.displayName);
-		    console.log("  Email: "+profile.email);
-		    console.log("  Photo URL: "+profile.photoURL);
+		    console.log("  Provider Name: "+profile.displayName);
+		    console.log("  Provider Email: "+profile.email);
+		    console.log("  Provider Photo URL: "+profile.photoURL);
 		  });
-		} else {console.log("failed");}
-		  } else {
-		    // No user is signed in.
-		  }
+	    user = firebaseUser;
 		});
 		
 		var ref = firebase.database().ref().child("messages");
-		  // create a synchronized array
-		  $scope.messages = $firebaseArray(ref);
-		  // add new items to the array
-		  // the message is automatically added to our Firebase database!
-		  $scope.addMessage = function() {
+		// create a synchronized array
+		$scope.messages = $firebaseArray(ref);
+		// add new items to the array
+		// the message is automatically added to our Firebase database!
+		$scope.addMessage = function() {
 			$scope.messages.$add({
+			  user: user.displayName,
 			  text: $scope.newMessageText
 			});
-		  };
+		};
 
     }
 ]);
