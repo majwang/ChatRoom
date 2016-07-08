@@ -28,50 +28,35 @@
 
   </head>
 
+    <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">one</a></li>
+        <li><a href="/index.html">ChatRoom</a></li>
+        <li ng-hide="firebaseUser"><a href="/login.html">Login</a></li>
+		<li ng-show="firebaseUser"><a ng-click="auth.$signOut()">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <body ng-controller="chatController" style="background-color:#eee;">
-	  <nav>
-		<div class="nav-wrapper">
-		  <a href="#" class="brand-logo">Logo</a>
-		  <ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li><a href="#">one</a></li>
-			<li><a href="/home.html">ChatRoom</a></li>
-			<li ng-hide="firebaseUser"><a href="/login.html">Login</a></li>
-			<li ng-show="firebaseUser"><a ng-click="auth.$signOut()">Logout</a></li>
-		  </ul>
-		</div>
-	  </nav>
+  <body ng-controller="loginCtrl" style="background-color:#eee;">
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
 	<div class="container">  
-	<div ng-hide="firebaseUser">
-		<p>Please Log In!</p>
+	<div style="padding-top: 1cm;">
+	  <div ng-show="firebaseUser">
+		<p>Hello, {{ firebaseUser.email }}</p>
+		<button ng-click="auth.$signOut()">Sign Out</button>
+	  </div>
+	  <div ng-hide="firebaseUser">
+		<p>Welcome, please sign in.</p>
+		<button ng-click="signInG()">Sign In With Google</button>
+	  </div>
 	</div>
-	<div class = "card">
-	<div class="card-content">
-	<ul>
-    	<li ng-repeat="message in messages">
-			<div class = "row valign">
-		    	<div class ="col s1">User</div>
-			        <!-- edit a message -->
-			        <div class ="col s10"><input ng-model="message.text" ng-change="messages.$save(message)"/></div>
-			        <!-- delete a message -->
-			        <div class ="col s1"><button class="waves-effect waves-teal btn-flat" ng-click="messages.$remove(message)">Delete</button></div>
-		    </div>
-	    </li>
-    </ul>
-    <!-- push a new message onto the array -->
-    <div class="divider" style="margin-bottom: 1cm;"></div>
-    <form ng-submit="addMessage()">
-    <div class = "row">
-    <div class = "col s10">
-      <input ng-model="newMessageText" /></div>
-      <div class = "col s2"><button class="waves-effect waves-light btn" type="submit">Submit<i class="material-icons right">send</i></button></div>
-      </div>
-    </form>
-	</div>
-	</div>
-	</div>
+	
+	
 	</body>
 
 	<footer class="page-footer">
