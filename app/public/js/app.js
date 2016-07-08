@@ -1,5 +1,5 @@
 var app =  angular.module('myApp',['firebase', 'ngRoute']);
-
+var user;
 app.factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
     return $firebaseAuth();
@@ -72,10 +72,31 @@ app.controller("loginCtrl", ["$scope", "Auth", "$window", "$location",
     $scope.auth = Auth;
 	$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
-	    
+		console.log("Name: "+firebaseUser.displayName);
+		firebaseUser.providerData.forEach(function (profile) {
+		    console.log("Sign-in provider: "+profile.providerId);
+		    console.log("  Provider-specific UID: "+profile.uid);
+		    console.log("  Provider Name: "+profile.displayName);
+		    console.log("  Provider Email: "+profile.email);
+		    console.log("  Provider Photo URL: "+profile.photoURL);
+		  });
+	    user = firebaseUser;
     });
+	
+	$scope.rename = function(){
+		user.updateProfile({
+		  displayName: $scope.name,
+		}).then(function() {
+		  // Update successful.
+		   console.log("updated");
+		   $window.location.reload();
+		}, function(error) {
+		  // An error happened.
+		});
+	}
 	$scope.signInG = function() {
 		var provider = new firebase.auth.GoogleAuthProvider();
+		provider.addScope('https://www.googleapis.com/auth/plus.login');
 		firebase.auth().signInWithRedirect(provider);
 		firebase.auth().getRedirectResult().then(function(result) {
 		  if (result.credential) {
