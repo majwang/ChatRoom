@@ -7,10 +7,13 @@ app.factory("Auth", ["$firebaseAuth",
 ]);
 app.config(function($routeProvider) {
 	$routeProvider
-
-		// route for the home page
 		.when('/index', {
 			templateUrl : 'index.html',
+			controller  : 'indexCtrl'
+		})
+		// route for the home page
+		.when('/chat', {
+			templateUrl : 'chat.html',
 			controller  : 'chatController'
 		})
 
@@ -19,9 +22,44 @@ app.config(function($routeProvider) {
 			templateUrl : 'login.html',
 			controller  : 'loginCtrl'
 		})
+		
+		.when('/store', {
+			templateUrl : 'store.html',
+			controller  : 'storeCtrl'
+		})
+		
+		.when('/account', {
+			templateUrl : 'account.html',
+			controller  : 'accountCtrl'
+		})
 
+		.when('/forums', {
+			templateUrl : 'forums.html',
+			controller  : 'forumsCtrl'
+		})
 });
-	
+
+app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
+	function($scope, Auth, $window, $location) {	
+		$scope.message = 'Home Page';
+	}
+]);
+
+app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location",
+	function($scope, Auth, $window, $location) {	
+		$scope.message = 'Store Page';
+	}
+]);
+app.controller("accountCtrl", ["$scope", "Auth", "$window", "$location",
+	function($scope, Auth, $window, $location) {	
+		$scope.message = 'Account Page';
+	}
+]);
+app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
+	function($scope, Auth, $window, $location) {	
+		$scope.message = 'Forums Page';
+	}
+]);
 app.controller("chatController", ["$scope", "$firebaseArray", "Auth", 
 	function($scope, $firebaseArray, Auth) {
 		$scope.message = 'ChatRoom';

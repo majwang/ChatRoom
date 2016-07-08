@@ -29,14 +29,14 @@
   </head>
 	
 
-  <body ng-controller="loginCtrl" style="background-color:#eee;">
-  
-    <nav>
+  <body ng-controller="loginCtrl" style="background-color:#eee;"> 
+  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <a href="/index.html class="brand-logo">Home</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">one</a></li>
-        <li><a href="/index.html">ChatRoom</a></li>
+        <li><a href="/store.html">Store</a></li>
+		<li><a href="/forums.html">Forums</a></li>
+        <li><a href="/chat.html">ChatRoom</a></li>
         <li ng-hide="firebaseUser"><a href="/login.html">Login</a></li>
 		<li ng-show="firebaseUser"><a href="/login.html">Account</a></li>
       </ul>
@@ -61,11 +61,11 @@
 	  </div>
 	  <div ng-hide="firebaseUser">
 		<p>Welcome, please sign in.</p>
-		<button ng-click="signInG()">Sign In With Google</button>
+		<input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
+
 	  </div>
 	</div>
-	
-	
+	</div>
 	</body>
 
 	<footer class="page-footer">
@@ -78,9 +78,9 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Firebase</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Angular</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">MaterializeCSS</a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://www.firebase.com/">Firebase</a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://angularjs.org/">Angular</a></li>
+                  <li><a class="grey-text text-lighten-3" href="http://http://materializecss.com/">MaterializeCSS</a></li>
                 </ul>
               </div>
             </div>
