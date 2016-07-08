@@ -30,6 +30,7 @@
 
 
   <body ng-controller="chatController" style="background-color:#eee;">
+  
 	  <nav>
 		<div class="nav-wrapper">
 		  <a href="#" class="brand-logo">Logo</a>
@@ -44,6 +45,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
 	<div class="container">  
+	<h2>{{ message }}</h2>
 	<div ng-hide="firebaseUser">
 		<p>Please Log In!</p>
 	</div>

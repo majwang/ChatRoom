@@ -24,6 +24,7 @@ app.config(function($routeProvider) {
 	
 app.controller("chatController", ["$scope", "$firebaseArray", "Auth", 
 	function($scope, $firebaseArray, Auth) {
+		$scope.message = 'ChatRoom';
 		$scope.auth = Auth;
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
 			$scope.firebaseUser = firebaseUser;
@@ -45,6 +46,7 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth",
 
 app.controller("loginCtrl", ["$scope", "Auth", "$window", "$location",
   function($scope, Auth, $window, $location) {
+	$scope.message = 'Login Page';
     $scope.auth = Auth;
 	$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
