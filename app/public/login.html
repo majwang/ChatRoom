@@ -38,7 +38,7 @@
         <li><a href="#">one</a></li>
         <li><a href="/index.html">ChatRoom</a></li>
         <li ng-hide="firebaseUser"><a href="/login.html">Login</a></li>
-		<li ng-show="firebaseUser"><a ng-click="auth.$signOut()">Logout</a></li>
+		<li ng-show="firebaseUser"><a ng-click="/login.html">Account</a></li>
       </ul>
     </div>
   </nav>
@@ -49,7 +49,9 @@
 	<div style="padding-top: 1cm;">
 	  <div ng-show="firebaseUser">
 		<p>Hello, {{ firebaseUser.email }}</p>
-		
+		<p> Name: {{firebaseUser.displayName}}
+		<p> Photo: {{firebaseUser.photoURL}}
+		<p> uid: {{firebaseUser.uid}}
 		<button ng-click="auth.$signOut()">Sign Out</button>
 	  </div>
 	  <div ng-hide="firebaseUser">
