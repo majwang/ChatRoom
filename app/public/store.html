@@ -50,9 +50,8 @@
 	<h2 >{{ message }}</h2> 
 		<div class="row">
 	  
-		<div class="col-xs-offset-8 col-xs-4">
 		<h3>Summary <span>(ngcart-summary)</span></h3>
-			
+		<div class="right">	
 		  <ngcart-summary></ngcart-summary>
 		</div>
 		</div>
@@ -72,7 +71,7 @@
 		<div class="col-xs-6 col-sm-3">
 			<h4>My Item #3</h4>
 			<p> $25.75</p>
-			<ngcart-addtocart id="item3" name="My Item #3" price="25.75" quantity="3" quantity-max="10">Add to Cart</ngcart-addtocart>
+			<ngcart-addtocart id="item3" name="My Item #3" price="25.75" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
 		</div>
 		<div class="col-xs-6 col-sm-3">
 			<h4>My Item #4</h4>
@@ -193,10 +192,10 @@
 					<td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
 
 					<td>{{ item.getName() }}</td>
-					<td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
-							  ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
+					<td><a class="btn-floating waves-effect waves-light red" ng-class="{'disabled':item.getQuantity()==1}"
+							  ng-click="item.setQuantity(-1, true)"><i class="material-icons">remove</i></a>&nbsp;&nbsp;
 						{{ item.getQuantity() | number }}&nbsp;&nbsp;
-						<span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
+						<a class="btn-floating waves-effect waves-light red" ng-click="item.setQuantity(1, true)"><i class="material-icons">add</i></a></td>
 					<td>{{ item.getPrice() | currency}}</td>
 					<td>{{ item.getTotal() | currency }}</td>
 				</tr>
@@ -210,13 +209,12 @@
 
 		</div>
 		<div ng-show="attrs.id">
-			<div>
+			<div class = "right-align">
 				<span ng-show="quantityMax">
-					<select name="quantity" id="quantity" ng-model="q"
-							ng-options=" v for v in qtyOpt"></select>
+						<input class = "col s2" ng-model="amount">
 				</span>
 				<a class="btn btn-sm btn-primary"
-				   ng-click="ngCart.addItem(id, name, price, q, data)"
+				   ng-click="ngCart.addItem(id, name, price, amount, data)"
 				   ng-transclude></a>
 			</div>
 			<mark  ng-show="inCart()">

@@ -58,9 +58,25 @@ app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
 	}
 ]);
 
-app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
-	function($scope, Auth, $window, $location, ngCart) {	
+app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart", '$http',
+	function($scope, Auth, $window, $location, ngCart, $http) {	
 		$scope.message = 'Store Page';
+		$scope.amount = 0;
+		ngCart.setTaxRate(7.5);
+		ngCart.setShipping(2.99);  
+		$scope.auth = Auth;
+		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
+        $scope.firebaseUser = firebaseUser;
+		console.log("Name: "+firebaseUser.displayName);
+		firebaseUser.providerData.forEach(function (profile) {
+		    console.log("Sign-in provider: "+profile.providerId);
+		    console.log("  Provider-specific UID: "+profile.uid);
+		    console.log("  Provider Name: "+profile.displayName);
+		    console.log("  Provider Email: "+profile.email);
+		    console.log("  Provider Photo URL: "+profile.photoURL);
+		  });
+	    user = firebaseUser;
+		});
 	}
 ]);
 app.controller("accountCtrl", ["$scope", "Auth", "$window", "$location",
