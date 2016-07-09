@@ -24,6 +24,7 @@
 	</script>
     <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 	<script type="text/javascript" src = "/js/app.js"></script> 
+	<script src="/ngCart-master/dist/ngCart.js"></script>
 	<title>Welcome to ChatRoom</title>
 
   </head>
@@ -48,8 +49,8 @@
 	<h2 >{{ message }}</h2> 
 	<div style="padding-top: 1cm;">
 	  <div ng-show="firebaseUser">
-		<p>Hello, {{ firebaseUser.displayName }}</p>
-		<p>Hello, {{ firebaseUser.email }}</p>
+		<p>Name: {{ firebaseUser.displayName }}</p>
+		<p>Email:  {{ firebaseUser.email }}</p>
 		<p> uid: {{firebaseUser.uid}} </p>
 		<div class = "row"> 
 			<div class = "col s2">Name:</div> 

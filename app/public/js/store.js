@@ -42,19 +42,6 @@ app.config(function($routeProvider) {
 app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
 	function($scope, Auth, $window, $location) {	
 		$scope.message = 'Home Page';
-		$scope.auth = Auth;
-		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
-        $scope.firebaseUser = firebaseUser;
-		console.log("Name: "+firebaseUser.displayName);
-		firebaseUser.providerData.forEach(function (profile) {
-		    console.log("Sign-in provider: "+profile.providerId);
-		    console.log("  Provider-specific UID: "+profile.uid);
-		    console.log("  Provider Name: "+profile.displayName);
-		    console.log("  Provider Email: "+profile.email);
-		    console.log("  Provider Photo URL: "+profile.photoURL);
-		  });
-	    user = firebaseUser;
-		});
 	}
 ]);
 
@@ -107,8 +94,7 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth",
 
 app.controller("loginCtrl", ["$scope", "Auth", "$window", "$location",
   function($scope, Auth, $window, $location) {
-	$scope.message = 'My Account';
-	
+	$scope.message = 'Login Page';
     $scope.auth = Auth;
 	$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
