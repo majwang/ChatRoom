@@ -53,9 +53,9 @@
 	<ul>
     	<li ng-repeat="message in messages">
 			<div class = "row valign">
-		    	<div class ="col s2">{{ message.user }}:</div>
+		    	<div class ="col s2"><i class="material-icons left">verified_user</i>{{ message.user }}:</div>
 			        <!-- edit a message -->
-			        <div class ="col s8"><input ng-model="message.text" ng-change="messages.$save(message)"/></div>
+			        <div class ="col s9"><input ng-model="message.text" ng-change="messages.$save(message)"/></div>
 			        <!-- delete a message -->
 			        <div class ="col s1"><button class="waves-effect waves-light btn-flat" ng-click="messages.$remove(message)">Delete</button></div>
 		    </div>

@@ -34,7 +34,7 @@
   
     <nav>
     <div class="nav-wrapper">
-      <a href="/index.html class="brand-logo">Home</a>
+      <a href="/index.html" class="brand-logo">Home</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/store.html">Store</a></li>
 		<li><a href="/forums.html">Forums</a></li>
@@ -47,69 +47,63 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
 	<div class="container">
-	<h2 >{{ message }}</h2> 
+	<h2 >{{ message }}</h2>
+	<div class = "row"> 
+	<div class="card">
 		<div class="row">
-	  
-		<h3>Summary <span>(ngcart-summary)</span></h3>
-		<div class="right">	
-		  <ngcart-summary></ngcart-summary>
+			<h3>Summary</h3>
+			<div class="right">	
+			  <ngcart-summary></ngcart-summary>
+			</div>
 		</div>
-		</div>
-		<hr />
-			 <h3>Add to Cart <span>(ngcart-addtocart)</span></h3>
+		<hr/>
+	<h3>Add to Cart</h3>
 	<div class="row">
-		<div class="col-xs-6 col-sm-3">
+		<div class="col s12">
 			<h4>My Item #1</h4>
 			<p> $10.99</p>
 			<ngcart-addtocart id="item1" name="My Item #1" price="10.99" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
 		</div>
-		<div class="col-xs-6 col-sm-3">
+		<div class="col s12">
 			<h4>My Item #2</h4>
 			<p> $15.29</p>
 			<ngcart-addtocart id="item2" name="My Item #2" price="15.29" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
 		</div>
-		<div class="col-xs-6 col-sm-3">
+		<div class="col s12">
 			<h4>My Item #3</h4>
 			<p> $25.75</p>
 			<ngcart-addtocart id="item3" name="My Item #3" price="25.75" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
 		</div>
-		<div class="col-xs-6 col-sm-3">
+		<div class="col s12">
 			<h4>My Item #4</h4>
 			<p> $29.25</p>
 			<ngcart-addtocart id="item4" name="My Item #4" price="29.25" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>        
 		</div>
 	</div>
-
-		<hr/>
-		<h3>Cart <span> (ngcart-cart)</span></h3>
-
-		<ngcart-cart></ngcart-cart>
-	   
-		<hr/>
-
-	<div class="row">
-		<div class="col-md-12">
-			
-		<h3>Checkout <span> (ngcart-checkout)</span></h3>
-			
-			
-			<div class="row">
-		<div class="col-xs-4">
-			<h4>service 'log'</h4>
-			<ngcart-checkout service="log">Checkout</ngcart-checkout>
-		</div>
-		<div class="col-xs-4">
-			<h4>service 'http'</h4>
-			<ngcart-checkout service="http" settings="httpSettings">Checkout </ngcart-checkout>
-		</div>
-		<div class="col-xs-4">
-			<h4>service 'paypal'</h4>
-			<ngcart-checkout service="paypal" settings="payPalSettings"></ngcart-checkout>
-		</div>
 	</div>
-			
-
-
+	</div>
+	<div class = "card">
+		<h3>Cart</h3>
+		<ngcart-cart></ngcart-cart>
+		<hr/>
+		<div class="row">
+			<div class="col s12">
+				<h3>Checkout</h3>			
+				<div class="row">
+					<div class="col s12">
+						<h4>service 'log'</h4>
+						<ngcart-checkout service="log">Checkout</ngcart-checkout>
+					</div>
+					<div class="col s12">
+						<h4>service 'http'</h4>
+						<ngcart-checkout service="http" settings="httpSettings">Checkout </ngcart-checkout>
+					</div>
+					<div class="col s12">
+						<h4>service 'paypal'</h4>
+						<ngcart-checkout service="paypal" settings="payPalSettings"></ngcart-checkout>
+					</div>
+				</div>	
+			</div>
 		</div>
 	</div>
 	</div>
