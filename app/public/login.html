@@ -33,7 +33,7 @@
   <body ng-controller="loginCtrl" style="background-color:#eee;"> 
   <nav>
     <div class="nav-wrapper">
-      <a href="/index.html class="brand-logo">Home</a>
+      <a href="/index.html" class="brand-logo">Home</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/store.html">Store</a></li>
 		<li><a href="/forums.html">Forums</a></li>
@@ -45,28 +45,36 @@
   </nav>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
-	<div class="container">
-	<h2 >{{ message }}</h2> 
-	<div style="padding-top: 1cm;">
-	  <div ng-show="firebaseUser">
-		<p>Name: {{ firebaseUser.displayName }}</p>
-		<p>Email:  {{ firebaseUser.email }}</p>
-		<p> uid: {{firebaseUser.uid}} </p>
-		<div class = "row"> 
-			<div class = "col s2">Name:</div> 
-			<div class = "col s8"><input type="text" ng-model="name"></div>
-			<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div>
-		</div>
-		
-		<button ng-click="auth.$signOut()">Sign Out</button>
-	  </div>
-	  <div ng-hide="firebaseUser">
-		<p>Welcome, please sign in.</p>
-		<input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
+  <div class="container">
+    <div style="padding-top: 1cm;">
+    <div class ="row">
+      <div class = "col s8 offset-s2">
+        <div class = "card">
+          <div class="card-content">
+            <h2 >{{ message }}</h2> 
 
-	  </div>
-	</div>
-	</div>
+            <div ng-show="firebaseUser">
+              <h5>{{ firebaseUser.displayName }}</h5>
+              <p>{{ firebaseUser.photoURL }}</p>
+              <p><i class="material-icons left">email</i>{{ firebaseUser.email }}</p>
+              <!--<p> uid: {{firebaseUser.uid}} </p>-->
+              <p>Want a display name change?</p>
+              <div class = "row">
+                <div class = "col s10"><input type="text" ng-model="name"></div>
+                <div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div>
+              </div>
+            </div>
+          </div>
+          <button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button>
+        </div>
+        <div ng-hide="firebaseUser">
+          <p>Welcome, please sign in.</p>
+          <input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
 	</body>
 
 	<footer class="page-footer">
