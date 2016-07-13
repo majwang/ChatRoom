@@ -1,42 +1,20 @@
-var app =  angular.module('myApp',['firebase', 'ngRoute', 'ngCart']);
+var app =  angular.module('myApp',['firebase', 'ngRoute', 'ngCart', 'ui.router' ]);
 var user;
 app.factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
     return $firebaseAuth();
   }
 ]);
-app.config(function($routeProvider) {
-	$routeProvider
-		.when('/index', {
-			templateUrl : 'index.html',
-			controller  : 'indexCtrl'
-		})
-		// route for the home page
-		.when('/chat', {
-			templateUrl : 'chat.html',
-			controller  : 'chatController'
-		})
-
-		// route for the about page
-		.when('/login', {
-			templateUrl : 'login.html',
-			controller  : 'loginCtrl'
-		})
-		
-		.when('/store', {
-			templateUrl : 'store.html',
-			controller  : 'storeCtrl'
-		})
-		
-		.when('/account', {
-			templateUrl : 'account.html',
-			controller  : 'accountCtrl'
-		})
-
-		.when('/forums', {
-			templateUrl : 'forums.html',
-			controller  : 'forumsCtrl'
-		})
+app.config(function($routeProvider, $stateProvider) {
+	$stateProvider
+        .state('index', {
+            url: '/index',
+            templateUrl: 'index.html'
+        })
+        .state('account', {
+            url: '/account/:id',
+            templateUrl: 'account.html'
+        })
 });
 
 app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
@@ -79,9 +57,10 @@ app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
 		});
 	}
 ]);
-app.controller("accountCtrl", ["$scope", "Auth", "$window", "$location",
-	function($scope, Auth, $window, $location) {	
-		$scope.message = 'Account Page';
+app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$stateParams",
+	function($scope, Auth, $window, $state, $stateParams) {	
+		$scope.id = $stateParams.id;
+		$scope.message = 'Account Page for id' + $scope.id;
 	}
 ]);
 app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
@@ -89,13 +68,13 @@ app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
 		$scope.message = 'Forums Page';
 	}
 ]);
-app.controller("chatController", ["$scope", "$firebaseArray", "Auth", 
-	function($scope, $firebaseArray, Auth) {
+app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window", "$state",
+	function($scope, $firebaseArray, Auth, $window, $state) {
 		$scope.message = 'ChatRoom';
 		$scope.auth = Auth;
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
-		console.log("Name: "+firebaseUser.displayName);
+		console.log("Name: "+firebaseUser.displayName + "," + firebaseUser.uid);
 		firebaseUser.providerData.forEach(function (profile) {
 		    console.log("Sign-in provider: "+profile.providerId);
 		    console.log("  Provider-specific UID: "+profile.uid);
@@ -114,10 +93,13 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth",
 		$scope.addMessage = function() {
 			$scope.messages.$add({
 			  user: user.displayName,
+			  id: user.uid,
 			  text: $scope.newMessageText
 			});
 		};
-
+		$scope.goToAccount = function(uid){
+			$state.go("account", {id: uid});
+		}
     }
 ]);
 
