@@ -5,6 +5,19 @@ app.factory("Auth", ["$firebaseAuth",
     return $firebaseAuth();
   }
 ]);
+
+app.service('myService', function() {
+    return {
+      get: function() {
+        return this.savedData;
+      },
+      set: function(data) {
+        this.savedData = data;
+      },
+      savedData: 'Some default Value'
+    };
+
+  });
 app.config(function($routeProvider, $stateProvider) {
 	$stateProvider
         .state('index', {
@@ -57,10 +70,9 @@ app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
 		});
 	}
 ]);
-app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$stateParams",
-	function($scope, Auth, $window, $state, $stateParams) {	
-		$scope.id = $stateParams.id;
-		$scope.message = 'Account Page for id' + $scope.id;
+app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$stateParams", "myService",
+	function($scope, Auth, $window, $state, $stateParams, myService) {	
+		$scope.message = 'Account Page for id ' + myService.get();
 	}
 ]);
 app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
@@ -68,21 +80,22 @@ app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
 		$scope.message = 'Forums Page';
 	}
 ]);
-app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window", "$state",
-	function($scope, $firebaseArray, Auth, $window, $state) {
+app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window", "$state", "myService",
+	function($scope, $firebaseArray, Auth, $window, $state, myService) {
 		$scope.message = 'ChatRoom';
 		$scope.auth = Auth;
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
-		console.log("Name: "+firebaseUser.displayName + "," + firebaseUser.uid);
+		console.log("Name: "+firebaseUser.displayName + "," + firebaseUser.email);
 		firebaseUser.providerData.forEach(function (profile) {
 		    console.log("Sign-in provider: "+profile.providerId);
 		    console.log("  Provider-specific UID: "+profile.uid);
 		    console.log("  Provider Name: "+profile.displayName);
 		    console.log("  Provider Email: "+profile.email);
 		    console.log("  Provider Photo URL: "+profile.photoURL);
+			user = profile;
 		  });
-	    user = firebaseUser;
+	    
 		});
 		
 		var ref = firebase.database().ref().child("messages");
@@ -93,12 +106,14 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window",
 		$scope.addMessage = function() {
 			$scope.messages.$add({
 			  user: user.displayName,
-			  id: user.uid,
+			  email: user.email,
 			  text: $scope.newMessageText
 			});
 		};
-		$scope.goToAccount = function(uid){
-			$state.go("account", {id: uid});
+		$scope.goToAccount = function(email){
+			myService.set(email+"");
+			console.log(" Email: "+email);
+			$window.location.href = "/account.html"
 		}
     }
 ]);

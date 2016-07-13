@@ -54,7 +54,7 @@
 	<ul>
     	<li ng-repeat="message in messages">
 			<div class = "row valign">
-		    	<div class ="col s2"><i class="material-icons left">verified_user</i><a ng-click="goToAccount(message.id)">{{ message.user}}:</a></div>
+		    	<div class ="col s2"><i class="material-icons left">verified_user</i><a ng-click="goToAccount(message.email)">{{ message.email}}:</a></div>
 			        <!-- edit a message -->
 			        <div class ="col s9"><input ng-model="message.text" ng-change="messages.$save(message)"/></div>
 			        <!-- delete a message -->
