@@ -1,0 +1,27 @@
+<h2>{{ message }}</h2>
+	<div style="padding-top: 1cm;">
+		<div class ="row">
+		  <div class = "col s8 offset-s2">
+			<div class = "card">
+			  <div class="card-content">
+				<div ng-show="firebaseUser">
+				  <h5>{{ firebaseUser.displayName }}</h5>
+				  <p>{{ firebaseUser.photoURL }}</p>
+				  <p><i class="material-icons left">email</i>{{ firebaseUser.email }}</p>
+				  <!--<p> uid: {{firebaseUser.uid}} </p>-->
+				  <p>Want a display name change?</p>
+				  <div class = "row">
+					<div class = "col s10"><input type="text" ng-model="name"></div>
+					<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div>
+				  </div>
+				</div>
+			  </div>
+			  <button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button>
+			</div>
+			<div ng-hide="firebaseUser">
+			  <p>Welcome, please sign in.</p>
+			  <input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
+			</div>
+		  </div>
+		</div>
+	</div>

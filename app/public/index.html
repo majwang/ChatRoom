@@ -31,32 +31,27 @@
   </head>
 
 
-  <body ng-controller="indexCtrl" style="background-color:#eee;">
+  <body style="background-color:#eee;">
   
 	  <nav>
 		<div class="nav-wrapper">
-		  <a href="/index.html" class="brand-logo">Home</a>
+		  <a ui-sref="index" class="brand-logo">Home</a>
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li><a href="/store.html">Store</a></li>
-			<li><a href="/forums.html">Forums</a></li>
-			<li><a href="/chat.html">ChatRoom</a></li>
-			<li ng-hide="firebaseUser"><a href="/login.html">Login</a></li>
-			<li ng-show="firebaseUser"><a href="/login.html">Account</a></li>
+			<li><a ui-sref="index.store">Store</a></li>
+			<li><a ui-sref="index.forums">Forums</a></li>
+			<li><a ui-sref="index.chat">ChatRoom</a></li>
+			<li ng-hide="firebaseUser"><a ui-sref="index.login">Login</a></li>
+			<li ng-show="firebaseUser"><a ui-sref="index.login">Account</a></li>
 		  </ul>
 		</div>
 	  </nav>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-	<div class="container">  
+
 	
-	<h2>{{ message }}</h2>
-	<div ng-hide="firebaseUser">
-		<p>Please Log In!</p>
-	</div>
-	<div ng-show="firebaseUser">
-		<p> Welcome {{ firebaseUser.displayName }} !</p>
-	</div>
-	</div>
+		<div class="container">  
+			<div ui-view = "index"></div>
+			
+		</div>
+	
 	</body>
 
 	<footer class="page-footer">

@@ -6,32 +6,61 @@ app.factory("Auth", ["$firebaseAuth",
   }
 ]);
 
-app.service('myService', function() {
-    return {
-      get: function() {
-        return this.savedData;
-      },
-      set: function(data) {
-        this.savedData = data;
-      },
-      savedData: 'Some default Value'
+app.service('myService', function(){
+   var text ='hello';
+   return { 
+     get: function(){
+       return text;
+    },
+     set: function(value){
+      text=value;
+      console.log(text);
+    },
+      value:text
     };
+});
+app.config(function($routeProvider, $stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/home.html');
 
-  });
-app.config(function($routeProvider, $stateProvider) {
 	$stateProvider
         .state('index', {
             url: '/index',
-            templateUrl: 'index.html'
+			views: {
+				"index": {
+					templateUrl: '/templates/home.html',
+					controller: 'indexCtrl'
+				},
+			  }			
         })
-        .state('account', {
-            url: '/account/:id',
-            templateUrl: 'account.html'
+        .state('index.account', {
+            url: '/account',
+            templateUrl: '/templates/account.html',
+			controller: 'accountCtrl'
         })
+		.state('index.login', {
+            url: '/login',
+            templateUrl: '/templates/login.html',
+			controller: 'loginCtrl'
+        })
+		.state('index.store', {
+            url: '/store',
+            templateUrl: '/templates/store.html',
+			controller: 'storeCtrl'
+        })
+		.state('index.forums', {
+            url: '/forums',
+            templateUrl: '/templates/forums.html',
+			controller: 'forumsCtrl'
+        })
+		.state('index.chat', {
+            url: '/chat',
+            templateUrl: '/templates/chat.html',
+			controller: 'chatController'
+        });
 });
 
-app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
-	function($scope, Auth, $window, $location) {	
+app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location", "$state",
+	function($scope, Auth, $window, $location, $state) {	
 		$scope.message = 'Home Page';
 		$scope.auth = Auth;
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
@@ -49,8 +78,8 @@ app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location",
 	}
 ]);
 
-app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart", '$http',
-	function($scope, Auth, $window, $location, ngCart, $http) {	
+app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart", '$http', '$state',
+	function($scope, Auth, $window, $location, ngCart, $http, $state) {	
 		$scope.message = 'Store Page';
 		$scope.amount = 0;
 		ngCart.setTaxRate(7.5);
@@ -72,7 +101,8 @@ app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
 ]);
 app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$stateParams", "myService",
 	function($scope, Auth, $window, $state, $stateParams, myService) {	
-		$scope.message = 'Account Page for id ' + myService.get();
+		$scope.email = myService.get();
+		$scope.message = 'Account Page for: ' + $scope.email;
 	}
 ]);
 app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
@@ -111,9 +141,10 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window",
 			});
 		};
 		$scope.goToAccount = function(email){
-			myService.set(email+"");
-			console.log(" Email: "+email);
-			$window.location.href = "/account.html"
+			$scope.email = email;
+			myService.set($scope.email);
+			console.log("email: " + myService.get());
+			$state.go('index.account');
 		}
     }
 ]);
