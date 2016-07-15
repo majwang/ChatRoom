@@ -116,7 +116,7 @@ app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$statePar
   				updateInfo(snapshot.val());
 		});
 		function updateInfo(snapshot){
-			console.log(snapshot.username);
+			console.log(snapshot.pic);
   			$scope.name = snapshot.username;
   			$scope.email = snapshot.email;
   			$scope.message = 'Account Page for: ' + snapshot.username;
@@ -160,6 +160,7 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window",
 			  id: user.uid,
 			  text: $scope.newMessageText
 			});
+			$scope.newMessageText = "";
 		};
 		$scope.goToAccount = function(id){
 			$scope.id = id;
@@ -186,15 +187,15 @@ app.controller("loginCtrl", ["$scope", "Auth", "$window", "$location", "$sce",
 		    	//console.log("  Provider Email: "+profile.email);
 		    	//console.log("  Provider Photo URL: "+profile.photoURL);
 		    	$scope.photoURL = $sce.trustAsResourceUrl(profile.photoURL);
+				user = profile;
 		  	});
-			user = firebaseUser;
 			
-			
+			console.log(user.photoURL);
 		    firebase.database().ref('users/' + firebaseUser.uid).set({
     			username: firebaseUser.displayName,
     			email: firebaseUser.email,
     			id: firebaseUser.uid,
-    			pic: firebaseUser.photoURL
+    			pic: user.photoURL
   		  	});
 		}
 	    
