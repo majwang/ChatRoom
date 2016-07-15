@@ -1,25 +1,25 @@
 <h2>{{ message }}</h2>
-	<div style="padding-top: 1cm;">
-		<div class ="row">
-		  <div class = "col s8 offset-s2">
-			<div class = "card" ng-show="firebaseUser">
-			  <div class="card-content">
-				  <h5>{{ firebaseUser.displayName }}</h5>
-				  <p><img-eng src= "{{photoURL}}" h= "150" w = "150" alt="Description"></img-eng></p>
-				  <p><i class="material-icons left">email</i>{{ firebaseUser.email }}</p>
-				  <!--<p> uid: {{firebaseUser.uid}} </p>-->
-				  <p>Want a display name change?</p>
-				  <div class = "row">
-					<div class = "col s10"><input type="text" ng-model="name"></div>
-					<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div>
-				  </div>
-			  </div>
-			  <button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button>
-			</div>
-			<div ng-hide="firebaseUser">
-			  <p>Welcome, please sign in.</p>
-			  <input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
-			</div>
-		  </div>
+<div class = "card" ng-show="firebaseUser">
+	<div class="center-align">
+		<div class = "row">
 		</div>
+		<div class = "row">
+		</div>
+		<div class = "row">
+		</div>
+	  <div class = "col s4 offset-s4"><h5>{{ firebaseUser.displayName }}</h5></div>
+	  <div class = "col s4 offset-s4"><p><img-eng src= "{{photoURL}}" h= "150" w = "150" alt="Description"></img-eng></p></div>
+	  <div class = "col s4 offset-s4"<p><i class="material-icons center">email</i>{{ firebaseUser.email }}</p>
+	  <!--<p> uid: {{firebaseUser.uid}} </p>-->
+	  <div><p>Want a display name change?</p></div>
+	  <div class = "row" >
+      	<div class = "col s6 offset-s3" ><input type="text" ng-model="name"></div>
+	  	<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div> 
+	  </div>
+	  <div><button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button></div>
 	</div>
+	<div ng-hide="firebaseUser">
+		<p>Welcome, please sign in.</p>
+		<input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />			</div>
+	</div>
+</div>

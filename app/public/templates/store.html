@@ -1,14 +1,18 @@
 		<h2>{{ message }}</h2>
-		<div class = "row"> 
 		<div class="card">
+				<div class = "row"></div>
+		<div class = "row"></div>
+		<div class = "row"></div>
 			<div class="row center align">
 				<h3>Summary</h3>
 				<ngcart-summary></ngcart-summary>
 			</div>
 			<hr/>
-		<h3>Add to Cart</h3>
-		<div class="row">
-			<div class="col s6">
+			<div class="row">
+			<div class = "col s11 offset-s1"><h3>Add to Cart</h3></div>
+			</div>
+			<div class="container row">
+			<div class="col s5 offset-s1">
 					<h4>My Item #1</h4>
 					<p> $12.99</p>
 					<ngcart-addtocart id="item1" name="My Item #1" price="12.99" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
@@ -18,7 +22,7 @@
 					<p> $14.99</p>
 					<ngcart-addtocart id="item1a" name="My Item #1a" price="14.99" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
 			</div>
-			<div class="col s6">
+			<div class="col s5  offset-s1">
 				<h4>My Item #2</h4>
 				<p> $15.29</p>
 				<ngcart-addtocart id="item2" name="My Item #2" price="15.29" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
@@ -28,7 +32,7 @@
 				<p> $25.29</p>
 				<ngcart-addtocart id="item2a" name="My Item #2a" price="25.29" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
 			</div>
-			<div class="col s6">
+			<div class="col s5  offset-s1">
 				<h4>My Item #3</h4>
 				<p> $25.75</p>
 				<ngcart-addtocart id="item3" name="My Item #3" price="25.75" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
@@ -38,14 +42,13 @@
 				<p> $32.75</p>
 				<ngcart-addtocart id="item3a" name="My Item #3a" price="32.75" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
 			</div>
-			<div class="col s6">
+			<div class="col s5 offset-s1">
 				<h4>My Item #4</h4>
 				<p> $29.25</p>
 				<ngcart-addtocart id="item4" name="My Item #4" price="29.25" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>        
 			</div>
 		</div>
-		<hr/>
-		</div>
+			<hr/>
 		</div>
 		
 		<div class = "card">
