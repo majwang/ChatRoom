@@ -70,15 +70,14 @@ app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location", "$state",
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
 		if(firebaseUser){
-			console.log("UID: "+firebaseUser.uid);
-			/*irebaseUser.providerData.forEach(function (profile) {
-		    	console.log("Sign-in provider: "+profile.providerId);
-		    	console.log("  Provider-specific UID: "+profile.uid);
-		    	console.log("  Provider Name: "+profile.displayName);
-		    	console.log("  Provider Email: "+profile.email);
-		    	console.log("  Provider Photo URL: "+profile.photoURL);
-		  	});
-		  	*/
+			// console.log("UID: "+firebaseUser.uid);
+			// firebaseUser.providerData.forEach(function (profile) {
+		 //    	console.log("Sign-in provider: "+profile.providerId);
+		 //    	console.log("  Provider-specific UID: "+profile.uid);
+		 //    	console.log("  Provider Name: "+profile.displayName);
+		 //    	console.log("  Provider Email: "+profile.email);
+		 //    	console.log("  Provider Photo URL: "+profile.photoURL);
+		 //  	});
 			user = firebaseUser;
 		}
 	    
@@ -87,7 +86,7 @@ app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location", "$state",
 ]);
 
 app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart", '$http', '$state',
-	function($scope, Auth, $window, $location, ngCart, $http, $state) {	
+	function($scope, Auth, $window, $location, ngCart, remove, $http, $state) {	
 		$scope.message = 'Store Page';
 		$scope.amount = 0;
 		ngCart.setTaxRate(7.5);
@@ -96,13 +95,13 @@ app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
 		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
         $scope.firebaseUser = firebaseUser;
 			if(firebaseUser){
-			firebaseUser.providerData.forEach(function (profile) {
-		    	console.log("Sign-in provider: "+profile.providerId);
-		    	console.log("  Provider-specific UID: "+profile.uid);
-		    	console.log("  Provider Name: "+profile.displayName);
-		    	console.log("  Provider Email: "+profile.email);
-		    	console.log("  Provider Photo URL: "+profile.photoURL);
-		  	});
+			// firebaseUser.providerData.forEach(function (profile) {
+		 //    	console.log("Sign-in provider: "+profile.providerId);
+		 //    	console.log("  Provider-specific UID: "+profile.uid);
+		 //    	console.log("  Provider Name: "+profile.displayName);
+		 //    	console.log("  Provider Email: "+profile.email);
+		 //    	console.log("  Provider Photo URL: "+profile.photoURL);
+		 //  	});
 			user = firebaseUser;
 			}
 		});
