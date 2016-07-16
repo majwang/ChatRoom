@@ -1,34 +1,42 @@
-<h2>{{ message }}</h2>
-<div class = "row">
-	<div class = "card offset-l3 col l6 s12">
-		<div ng-show="firebaseUser">
-			<div class="center-align">
-				<div class = "row"></div>
-				<div class = "row"></div>
-				<div class = "row"></div>
-				<div class = "row">
-					<div class = "col s12 center circle"><p><img-eng src= "{{photoURL}}" h= "150" w = "150" alt="Description"></img-eng></p></div>
-			 	</div>
-			 	<div class = "row">
-			 		<div class = "col s12 center"><h5>{{ firebaseUser.displayName }}</h5></div>
-			 	</div>
-			 	<div class = "row">
-			 		<div class = "col s12 center">{{ firebaseUser.email }}</div>
-			 	</div>
-			 	<div class = "row">
-					<div><p>Want a display name change?</p></div>
-				</div>
-				<div class = "row">
-		      	<div class = "col s6 offset-s2" ><input type="text" ng-model="name"></div>
-			  	<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div> 
-			  	</div>
-			  	<div><button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button></div>
-			  	<div class ="row"></div>
-			</div>
+<div class = "container">
+	<div ng-show="firebaseUser">
+		<h2>{{ message }}</h2>
+		<div class = "row">
+			<div class = "card offset-l3 col l6 s12">
+				<div class="center-align">
+					<div class = "row"></div>
+					<div class = "row"></div>
+					<div class = "row"></div>
+					<div class = "row">
+						<div class = "col s6 offset-s3 center"><img class =" s6 center circle" src= "{{photoURL}}" alt="Description"/>
+						</div>
+				 	</div>
+				 	<div class = "row">
+				 		<div class = "col s12 center"><h5>{{ firebaseUser.displayName }}</h5></div>
+				 	</div>
+				 	<div class = "row">
+				 		<div class = "col s12 center">{{ firebaseUser.email }}</div>
+				 	</div>
+				 	<div class = "row">
+						<div><p>Want a display name change?</p></div>
+					</div>
+					<div class = "row">
+			      		<div class = "col s6 offset-s2" ><input type="text" ng-model="name"></div>
+				  		<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div> 
+				  	</div>
+				  	<div><button class="waves-effect waves-light btn-flat" ng-click="auth.$signOut()">Sign Out</button></div>
+				  	<div class ="row"></div>
+				  	</div>
+				  	</div>
+				  	</div>
+				  	</div>
+				  	</div>
+				  	
 
-		<div ng-hide="firebaseUser">
-			<p>Welcome, please sign in.</p>
-			<input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />			</div>
-		</div>
+<div ng-hide="firebaseUser">
+	<img src='clock-login.jpg' style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;'>
+	<div class = "container">
+		<p>Welcome, please sign in.</p>
+		<input type="image" ng-click="signInG()" src = "btn_google_signin_light_normal_web.png" onclick = "btn_google_signin_light_pressed_web.png" />
 	</div>
 </div>

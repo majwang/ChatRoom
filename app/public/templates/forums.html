@@ -1,3 +1,4 @@
+<div class = "container">
 <h2>{{ message }}</h2>
 	<div style="padding-top: 1cm;">
 	  <div ng-show="firebaseUser">
@@ -11,12 +12,9 @@
 		</div>
 		
 		<button ng-click="auth.$signOut()">Sign Out</button>
-	  </div>
-	  <div ng-hide="firebaseUser">
-		<p>Welcome, please sign in.</p>
-		<button ng-click="signInG()">Sign In With Google</button>
-	  </div>
 	</div>
+</div>
+</div>
 
 
 	

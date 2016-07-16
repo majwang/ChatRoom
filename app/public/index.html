@@ -32,7 +32,10 @@
   </head>
 
 
-  <body ng-controller = "indexCtrl" style="background-color:#eee;">
+  <body ng-controller = "indexCtrl" style="background-color:#eee; margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;">
   
 	  <nav>
 		<div class="nav-wrapper">
@@ -46,20 +49,13 @@
 		  </ul>
 		</div>
 	  </nav>
-
-		<div class="container">  
-			<div ui-view = "index"></div>
-			
-		</div>
-	
-	</body>
-
+			<div style ="flex: 1 0 auto;"ui-view = "index"></div>
 	<footer class="page-footer">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">ChatRoom</h5>
-                <p class="grey-text text-lighten-4">A simple ChatRoom in the style of IRC rooms, requiring only a google login. Designed using Firebase, Angular and MaterializeCSS.</p>
+                <h5 class="white-text">Portfolio</h5>
+                <p class="grey-text text-lighten-4">A portfolio of web apps, requiring only a google login. Designed using Firebase, Angular and MaterializeCSS.</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Links</h5>
@@ -78,4 +74,5 @@
             </div>
           </div>
         </footer>
+        	</body>
 </html>

@@ -1,4 +1,6 @@
-		<h2>{{ message }}</h2>
+	<div class = "container">
+		<h2>{{ message }}</h2>		
+		<div ng-show="firebaseUser">
 		<div class="card">
 				<div class = "row"></div>
 		<div class = "row"></div>
@@ -56,8 +58,8 @@
 			</div>
 			<div class = "row"></div>
 		</div>
-		
-		<div class = "card">
+		</div>
+		<div class = "card" ng-show="firebaseUser">
 		<div class = "row"></div>
 			<h3>&emsp;Cart</h3>
 			<ngcart-cart></ngcart-cart>
@@ -82,7 +84,7 @@
 				</div>
 			</div>
 		</div>
-
+</div>
 		<script type="text/ng-template" id="template/ngCart/summary.html"><div class="row">
  
 			<div class="col-md-6">{{ ngCart.getTotalItems() }}
