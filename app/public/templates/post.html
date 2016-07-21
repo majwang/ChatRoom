@@ -1,0 +1,36 @@
+<div class = "container">
+<h2>Thread Topic : {{ message }}</h2>
+<h2>Author: {{ author }}</h2>
+<div ng-show="firebaseUser">
+	<div ng-show="isAuthor">
+		<button class="waves-effect waves-light btn" ng-click="edit()">Edit</button>
+	</div>
+	<div ng-hide = "editing" class = "card">
+		<div class ="row"></div>
+		<ul>
+			<li ng-repeat="message in messages">
+				<div class = "row">
+					<div class ="col s2 l2 truncate"><a style="cursor: pointer;" ng-click="goToAccount(message.id)">&emsp;{{ message.user }}:</a></div>
+					<!-- edit a message -->
+					<div class ="col s8 l8"><input ng-model="message.text" ng-change="messages.$save(message)"/></div>
+					<!-- delete a message -->
+					<div class ="right right-align col s2 l2"><button class="waves-effect waves-light btn-flat" ng-click="messages.$remove(message)">Delete</button></div>
+				</div>
+			</li>
+		</ul>
+		
+		<!-- push a new message onto the array -->
+		<div class="divider" style="margin-bottom: 1cm;"></div>
+		<form ng-submit="addMessage()">
+			<div class = "row">
+				<div class = "offset-l1 col l9"><input ng-model="newMessageText" /></div>
+				<div class = "col l2"><button class="waves-effect waves-light btn" type="submit">Submit<i class="material-icons right">send</i></button></div>
+			</div>
+		</form>
+		</div>
+	</div>	
+	<div ng-show = "editing">
+		<h3>WLKEFJLWEJFEEDITING</h3>
+	
+	</div>
+</div>

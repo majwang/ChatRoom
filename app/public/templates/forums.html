@@ -2,16 +2,26 @@
 <h2>{{ message }}</h2>
 	<div style="padding-top: 1cm;">
 	  <div ng-show="firebaseUser">
-		<p>Hello, {{ firebaseUser.displayName }}</p>
-		<p>Hello, {{ firebaseUser.email }}</p>
-		<p> uid: {{firebaseUser.uid}} </p>
-		<div class = "row"> 
-			<div class = "col s2">Name:</div> 
-			<div class = "col s8"><input type="text" ng-model="name"></div>
-			<div class = "col s2"><button ng-click = "rename()" class="waves-effect waves-light btn" type="submit">Change</button></div>
-		</div>
+		<div class = "card">
+		<h2>Threads</h2>
+		<ul>
+			<li ng-repeat="thread in threads">
+				<div class = "row">
+					<div class ="col s6 l6 truncate"><a style="cursor: pointer;" ng-click="goToThread(thread.$id)">&emsp;{{ thread.author }} : {{thread.topic}}</a></div>
+
+				</div>
+			</li>
+		</ul>
 		
-		<button ng-click="auth.$signOut()">Sign Out</button>
+		<!-- push a new message onto the array -->
+		<div class="divider" style="margin-bottom: 1cm;"></div>
+		<form ng-submit="addThread()">
+			<div class = "row">
+				<div class = "offset-l5 col l4"><input ng-model="topic" /></div>
+				<div class = "col l2"><button class="waves-effect waves-light btn" type="submit">Create<i class="material-icons right">Submit</i></button></div>
+			</div>
+		</form>
+	    </div>
 	</div>
 </div>
 </div>

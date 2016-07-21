@@ -14,7 +14,7 @@ app.service('myService', function(){
     },
      set: function(value){
       text=value;
-      console.log(text);
+      //console.log(text);
     },
       value:text
     };
@@ -52,6 +52,11 @@ app.config(function($routeProvider, $stateProvider, $urlRouterProvider) {
             url: '/forums',
             templateUrl: '/templates/forums.html',
 			controller: 'forumsCtrl'
+        })
+        .state('index.post', {
+            url: '/post',
+            templateUrl: '/templates/post.html',
+			controller: 'postCtrl'
         })
 		.state('index.chat', {
             url: '/chat',
@@ -124,9 +129,93 @@ app.controller("accountCtrl", ["$scope", "Auth", "$window", "$state", "$statePar
 		}
 	}
 ]);
-app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location",
-	function($scope, Auth, $window, $location) {	
+app.controller("postCtrl", ["$scope", "Auth", "$window", "$location", "$firebaseArray", "myService", "$state",
+	function($scope, Auth, $window, $location, $firebaseArray, myService, $state) {	
+		$scope.auth = Auth;
+		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
+        $scope.firebaseUser = firebaseUser;
+
+		if(firebaseUser){
+			/*firebaseUser.providerData.forEach(function (profile) {
+		    	console.log("Sign-in provider: "+profile.providerId);
+		    	console.log("  Provider-specific UID: "+profile.uid);
+		    	console.log("  Provider Name: "+profile.displayName);
+		    	console.log("  Provider Email: "+profile.email);
+		    	console.log("  Provider Photo URL: "+profile.photoURL);
+		  	});
+		  	*/
+			user = firebaseUser;
+			}
+		});
+		var threadId = myService.get();
+		console.log(threadId);
+		var ref = firebase.database().ref().child("Posts/" + threadId);
+		$scope.messages = $firebaseArray(ref);
+	    $scope.addMessage = function() {
+			$scope.messages.$add({
+			  user: user.displayName,
+			  email: user.email,
+			  id: user.uid,
+			  text: $scope.newMessageText
+			});
+			$scope.newMessageText = "";
+		};
+		firebase.database().ref('/Thread/' +  threadId).on('value', function(snapshot) { 
+  				updateInfo(snapshot.val());
+		});
+		function updateInfo(snapshot){
+			$scope.message = snapshot.topic;
+			$scope.author = snapshot.author;
+			$scope.authorId = snapshot.authorId;
+
+		}
+		if($scope.authorId == $scope.firebaseUser.uid){
+		    console.log("TRUE");
+			$scope.isAuthor = true;
+		}
+		$scope.edit = function(){
+			$scope.editing = true;
+		}
+			
+	}
+]);
+app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location", "$firebaseArray", "myService", "$state",
+	function($scope, Auth, $window, $location, $firebaseArray, myService, $state) {	
 		$scope.message = 'Forums Page';
+		$scope.topic = '';
+		$scope.auth = Auth;
+		$scope.auth.$onAuthStateChanged(function(firebaseUser) {
+        $scope.firebaseUser = firebaseUser;
+		if(firebaseUser){
+			/*firebaseUser.providerData.forEach(function (profile) {
+		    	console.log("Sign-in provider: "+profile.providerId);
+		    	console.log("  Provider-specific UID: "+profile.uid);
+		    	console.log("  Provider Name: "+profile.displayName);
+		    	console.log("  Provider Email: "+profile.email);
+		    	console.log("  Provider Photo URL: "+profile.photoURL);
+		  	});
+		  	*/
+			user = firebaseUser;
+			}
+		});
+		var randomId = Math.round(Math.random() * 100000000);
+		var ref = firebase.database().ref().child("Thread/");
+		$scope.threads =  $firebaseArray(ref);
+		$scope.addThread = function() {
+			$scope.threads.$add({
+			    author: user.displayName,
+			    authorId: user.uid,
+			    threadId: randomId,
+			    topic: $scope.topic
+			});
+			$scope.topic = "";
+		};
+		$scope.goToThread = function(id){
+			$scope.id = id;
+			myService.set($scope.id);
+			console.log("ThreadId: " + myService.get());
+			$state.go('index.post');
+		}
 	}
 ]);
 app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window", "$state", "myService",
