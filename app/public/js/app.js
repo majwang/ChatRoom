@@ -20,7 +20,7 @@ app.service('myService', function(){
     };
 });
 app.config(function($routeProvider, $stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/home.html');
+	$urlRouterProvider.otherwise('/index/login');
 
 	$stateProvider
         .state('index', {
