@@ -4,8 +4,9 @@
 	  <div ng-show="firebaseUser">
 		<div class = "card">
 		<h2>Threads</h2>
+		<h4>Filter by: <input type="text" ng-model="search"></h4>
 		<ul>
-			<li ng-repeat="thread in threads">
+			<li ng-repeat="thread in threads | filter:search">
 				<div class = "row">
 					<div class ="col s6 l6 truncate"><a style="cursor: pointer;" ng-click="goToThread(thread.$id)">&emsp;{{ thread.author }} : {{thread.topic}}</a></div>
 

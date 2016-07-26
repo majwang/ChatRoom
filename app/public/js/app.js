@@ -175,6 +175,17 @@ app.controller("postCtrl", ["$scope", "Auth", "$window", "$location", "$firebase
 		}
 		$scope.edit = function(){
 			$scope.editing = true;
+			$scope.isAuthor = false;
+		}
+		$scope.change = function(){
+			$scope.editing = false;
+			$scope.isAuthor = true;
+			firebase.database().ref('/Thread/' +  threadId).set({
+    			author: user.displayName,
+			    authorId: user.uid,
+			    threadId: threadId,
+			    topic: $scope.message
+  		  	});
 		}
 			
 	}

@@ -1,11 +1,21 @@
 <div class = "container">
-<h2>Thread Topic : {{ message }}</h2>
-<h2>Author: {{ author }}</h2>
+
 <div ng-show="firebaseUser">
+	<div ng-hide = "editing" >
+		<h2>Thread Topic : {{ message }}</h2>
+		<h2>Author: {{ author }}</h2>
+	</div>
+	<div ng-show = "editing">
+		<h2>Thread Topic : {{ message }}</h2>
+		<h2>Author: {{ author }}</h2>
+		<h2>Change Thread Topic: </h2>
+		<div class = "col s6 offset-s2" ><input type="text" ng-model="message"></div>
+		<div class = "col s2"><button ng-click = "change()" class="waves-effect waves-light btn" type="submit">Change</button></div> 
+	</div>
 	<div ng-show="isAuthor">
 		<button class="waves-effect waves-light btn" ng-click="edit()">Edit</button>
 	</div>
-	<div ng-hide = "editing" class = "card">
+	<div class = "card">
 		<div class ="row"></div>
 		<ul>
 			<li ng-repeat="message in messages">
@@ -29,8 +39,4 @@
 		</form>
 		</div>
 	</div>	
-	<div ng-show = "editing">
-		<h3>WLKEFJLWEJFEEDITING</h3>
-	
-	</div>
 </div>
