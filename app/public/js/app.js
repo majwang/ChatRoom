@@ -84,7 +84,7 @@ app.controller("indexCtrl", ["$scope", "Auth", "$window", "$location", "$state",
 		 //    	console.log("  Provider Photo URL: "+profile.photoURL);
 		 //  	});
 			user = firebaseUser;
-		}
+		}else $scope.message = 'Please Log In';
 	    
 		});
 	}
@@ -108,7 +108,7 @@ app.controller("storeCtrl", ["$scope", "Auth", "$window", "$location", "ngCart",
 		 //    	console.log("  Provider Photo URL: "+profile.photoURL);
 		 //  	});
 			user = firebaseUser;
-			}
+			}else $scope.message = 'Please Log In';
 		});
 	}
 ]);
@@ -145,7 +145,7 @@ app.controller("postCtrl", ["$scope", "Auth", "$window", "$location", "$firebase
 		  	});
 		  	*/
 			user = firebaseUser;
-			}
+			}else $scope.message = 'Please Log In';
 		});
 		var threadId = myService.get();
 		console.log(threadId);
@@ -207,7 +207,7 @@ app.controller("forumsCtrl", ["$scope", "Auth", "$window", "$location", "$fireba
 		  	});
 		  	*/
 			user = firebaseUser;
-			}
+			}else $scope.message = 'Please Log In';
 		});
 		var randomId = Math.round(Math.random() * 100000000);
 		var ref = firebase.database().ref().child("Thread/");
@@ -245,7 +245,7 @@ app.controller("chatController", ["$scope", "$firebaseArray", "Auth", "$window",
 		  	});
 		  	*/
 			user = firebaseUser;
-			}
+			}else $scope.message = 'Please Log In';
 		});
 		var ref = firebase.database().ref().child("messages");
 		// create a synchronized array
